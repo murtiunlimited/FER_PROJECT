@@ -1,15 +1,15 @@
-```markdown
-# 🎭 Facial Emotion Recognition (FER Project)
+#  Facial Emotion Recognition (FER Project)
 
 This project performs **real-time facial emotion detection** using a CNN model.  
 It supports both:
-- 🖥️ OpenCV (desktop webcam)
-- 🌐 Web browser (FastAPI + frontend)
+-  OpenCV (desktop webcam)
+-  Web browser (FastAPI + frontend)
 
 ---
 
 ## 📁 Project Setup and Structure
 
+```text
 FER_PROJECT/
 ├── .vscode/
 ├── backend/
@@ -41,58 +41,85 @@ FER_PROJECT/
 ├── final_emotion_model.keras
 ├── README.md
 └── requirements.txt
+```
+
+---
 
 ### 1. Create Virtual Environment
-    python -m venv venv
+```bash
+python -m venv venv
+```
 
 ### 2. Activate Virtual Environment
 
 **Windows:**
-    venv\Scripts\activate
+```bash
+venv\Scripts\activate
+```
 
 **Mac/Linux:**
-    source venv/bin/activate
+```bash
+source venv/bin/activate
+```
 
 ---
 
 ### 3. Install Requirements
-    pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
 ### 4. Prepare Dataset
 Unzip the dataset:
-    unzip data.zip
+```bash
+unzip data.zip
+```
 
 Make sure it extracts into:
-    data/raw/train/...
+```text
+data/raw/train/...
+```
 
 ---
 
-# ⚙️ OpenCV Version (Desktop Webcam)
+#  OpenCV Version (Desktop Webcam)
 
 ### Step 1: Preprocess Data
-    python -m src.preprocess
+```bash
+python -m src.preprocess
+```
 
 ### Step 2: Train Model
-    python -m src.train
+```bash
+python -m src.train
+```
 
 ### Step 3: Run Webcam Detection
-    python -m src.webcam
+```bash
+python -m src.webcam
+```
 
 ---
 
-# 🌐 Web Browser Version (FastAPI + Frontend)
+#  Web Browser Version (FastAPI + Frontend)
 
 ### Step 1: Preprocess Data
-    python -m src.preprocess
+```bash
+python -m src.preprocess
+```
 
 ### Step 2: Train Model
-    python -m src.train
+```bash
+python -m src.train
+```
 
 ### Step 3: Start Backend Server
-    cd backend
-    uvicorn app:app --reload --host 0.0.0.0 --port 8000
+```bash
+cd backend
+uvicorn app:app --reload --host 0.0.0.0 --port 8000
+```
 
 ### Step 4: Launch Frontend
 - Open `frontend/index.html` in your browser  
@@ -101,7 +128,7 @@ Make sure it extracts into:
 
 ---
 
-## 🧠 Model Details
+##  Model Details
 - Input: 48×48 grayscale face images  
 - Architecture: Lightweight CNN  
 - Classes:
@@ -115,7 +142,7 @@ Make sure it extracts into:
 
 ---
 
-## 🚀 Features
+##  Features
 - Real-time emotion detection  
 - Lightweight CNN (fast inference)  
 - Works with webcam + browser  
@@ -123,8 +150,7 @@ Make sure it extracts into:
 
 ---
 
-## 🛠️ Notes
+##  Notes
 - Ensure your webcam is accessible  
 - Backend must be running before opening the frontend  
 - Model file (`final_emotion_model.keras`) must exist in root directory  
-```
