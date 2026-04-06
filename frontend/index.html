@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-Time Emotion Detection</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; background: #f4f4f9; }
+        .video-container { position: relative; display: inline-block; margin-top: 20px; }
+        video { border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        #result { margin-top: 20px; font-size: 1.5rem; font-weight: bold; color: #333; }
+        .status { color: #888; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <h1>Emotion AI Live</h1>
+    
+    <div class="video-container">
+        <video id="video" width="640" height="480" autoplay muted></video>
+    </div>
+
+    <div id="result">Detecting...</div>
+    <div class="status">Status: <span id="connection">Connecting to Backend...</span></div>
+
+    <script>
+        const video = document.getElementById('video');
+        const resultDiv = document.getElementById('result');
+        const connectionStatus = document.getElementById('connection');
+
+        let isWaiting = false; // The "Gatekeeper" flag
+        const TARGET_FPS = 15; // Max requests per second
+        const INTERVAL = 1000 / TARGET_FPS;
+        let lastTime = 0;
+
+        // Start Webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => { 
+                video.srcObject = stream;
+                connectionStatus.innerText = "Camera Active - Sending Frames";
+            })
+            .catch(err => {
+                connectionStatus.innerText = "Camera Error: " + err.message;
+            });
+
+        async function mainLoop(timestamp) {
+            // Check if enough time passed AND if we aren't already waiting for a response
+            if (timestamp - lastTime >= INTERVAL && !isWaiting) {
+                lastTime = timestamp;
+                await captureAndSend();
+            }
+            requestAnimationFrame(mainLoop);
+        }
+
+        async function captureAndSend() {
+            isWaiting = true; // Lock the gate
+
+            // Create a small internal canvas for the 48x48 model input
+            const canvas = document.createElement('canvas');
+            canvas.width = 48;
+            canvas.height = 48;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, 48, 48);
+
+            // Convert to JPEG (lighter than PNG)
+            canvas.toBlob(async (blob) => {
+                const formData = new FormData();
+                formData.append('file', blob, 'frame.jpg');
+
+                try {
+                    const response = await fetch('http://localhost:8000/predict', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await response.json();
+                    resultDiv.innerText = "Emotion: " + data.emotion;
+                } catch (error) {
+                    console.error("Backend unreachable");
+                    resultDiv.innerText = "Backend Offline";
+                } finally {
+                    isWaiting = false; // Unlock the gate
+                }
+            }, 'image/jpeg', 0.6); // 60% quality is perfect for 48x48 pixels
+        }
+
+        // Start the loop
+        video.onplay = () => {
+            requestAnimationFrame(mainLoop);
+        };
+    </script>
+</body>
+</html>
