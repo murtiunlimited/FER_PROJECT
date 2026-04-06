@@ -1,0 +1,9 @@
+tensorflow
+numpy
+scikit-learn
+pillow
+opencv-python
+tqdm
+FastAPI
+uvicorn
+python-multipart
