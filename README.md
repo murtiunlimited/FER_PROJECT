@@ -10,12 +10,10 @@ It supports both:
 ## 📁 Project Setup and Structure
 
 ```text
-FER_PROJECT/
-├── .vscode/
-├── backend/
+FER-PROJ-2/
+├── api/
 │   ├── __pycache__/
-│   ├── app.py
-│   └── model.py
+│   └── app.py
 ├── data/
 │   ├── processed/
 │   │   ├── train/
@@ -25,16 +23,31 @@ FER_PROJECT/
 │       └── train/
 ├── frontend/
 │   └── index.html
-├── R&D/
-│   ├── 1_exp_emotion_cnn_light_v1.py
-│   └── 2_exp_emotion_customcnn.py
-├── src/
-│   ├── __pycache__/
-│   ├── __init__.py
-│   ├── model.py
-│   ├── preprocess.py
-│   ├── train.py
-│   └── webcam.py
+├── models/
+│   ├── best_emotion_model.keras
+│   └── final_emotion_model.keras
+└── src/
+    ├── __pycache__/
+    ├── data/
+    │   ├── __pycache__/
+    │   ├── __init__.py
+    │   ├── preprocess.py
+    │   └── split.py
+    ├── inference/
+    │   ├── __pycache__/
+    │   ├── __init__.py
+    │   ├── predict.py
+    │   └── webcam.py
+    ├── models/
+    │   ├── __pycache__/
+    │   ├── __init__.py
+    │   ├── evaluate.py
+    │   ├── model.py
+    │   └── train.py
+    ├── utils/
+    │   ├── __init__.py
+    │   └── config.py
+    └── __init__.py
 ├── venv/
 ├── best_emotion_model.keras
 ├── Dockerfile
