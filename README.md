@@ -152,6 +152,12 @@ chmod +x shellscript.sh
 ```bash
 ./shellscript.sh
 ```
+
+### Step 3: Start Backend Server
+```bash
+cd backend
+uvicorn app:app --reload --host 0.0.0.0 --port 8000
+```
 ---
 ##  Model Details
 - Input: 48×48 grayscale face images  
