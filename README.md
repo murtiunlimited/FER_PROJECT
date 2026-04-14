@@ -143,21 +143,16 @@ uvicorn app:app --reload --host 0.0.0.0 --port 8000
 
 #  Web Browser Version With Shell
 
-### Step 1: Preprocess Data
+### Enable Script Execution
 ```bash
 chmod +x shellscript.sh   
 ```
 
-### Step 2: Train Model
+### Run Full Pipeline (Preprocess + Train + Launch)
 ```bash
 ./shellscript.sh
 ```
 
-### Step 3: Start Backend Server
-```bash
-cd backend
-uvicorn app:app --reload --host 0.0.0.0 --port 8000
-```
 ---
 ##  Model Details
 - Input: 48×48 grayscale face images  
