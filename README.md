@@ -49,11 +49,11 @@ FER-PROJ-2/
     │   └── config.py
     └── __init__.py
 ├── venv/
-├── best_emotion_model.keras
 ├── Dockerfile
-├── final_emotion_model.keras
 ├── README.md
-└── requirements.txt
+├── requirements.txt
+├── run_pipeline.py
+└── shellscript.sh
 ```
 
 ---
