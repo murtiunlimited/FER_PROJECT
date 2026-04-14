@@ -148,7 +148,10 @@ uvicorn app:app --reload --host 0.0.0.0 --port 8000
 chmod +x shellscript.sh   
 ```
 
-
+### Step 2: Train Model
+```bash
+./shellscript.sh
+```
 ---
 ##  Model Details
 - Input: 48×48 grayscale face images  
