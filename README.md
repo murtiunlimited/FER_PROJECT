@@ -141,6 +141,15 @@ uvicorn app:app --reload --host 0.0.0.0 --port 8000
 
 ---
 
+#  Web Browser Version With Shell
+
+### Step 1: Preprocess Data
+```bash
+chmod +x shellscript.sh   
+```
+
+
+---
 ##  Model Details
 - Input: 48×48 grayscale face images  
 - Architecture: Lightweight CNN  
